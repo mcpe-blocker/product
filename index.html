@@ -1,0 +1,142 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Products</title>
+</head>
+<body>
+    <div class="container shadow" style="margin: 5% auto; padding: 3% 2%">
+        <h1 class="text-primary text-center">Welcome to Products Area</h1>
+        <form>
+        <div class="form-group">
+        <div class="row">
+        <button type="button" class="btn btn-success col-2" onclick="window.location.pathname = window.location.pathname + '/add'"><i class="fa fa-plus-circle"> Add new product</i></button>
+        <span class="col-8"></span>
+        <button type="button" class="btn btn-secondary col-2" onclick="window.location.pathname='/logout/${username}'"><i class="fas fa-sign-out-alt"></i> Log out</button>
+        </div>
+        </div>
+    <table id="products_table" class="table table-hover">
+        <tr class="row bg-light">
+            <th class="col-2 text-center">Id</th>
+            <th class="col-4 text-center">Name</th>
+            <th class="col-2 text-center">Show</th>
+            <th class="col-2 text-center">Edit</th>
+            <th class="col-2 text-center">Delete</th>
+        </tr>
+        <tr class="row">
+            <td class="col-2 text-center">${result[i].id}</td>
+            <td class="col-4 text-center">${result[i].name}</td>
+            <td class="col-2"><button class="btn btn-info btn-block" type="button" onclick="window.location.pathname = window.location.pathname + '/show/${result[i].id}'"><i class="fa fa-eye"></i> Show</button></td>
+            <td class="col-2"><button class="btn btn-primary btn-block" type="button" onclick="window.location.pathname = window.location.pathname + '/edit/${result[i].id}'"><i class="fa fa-pencil"> Edit</i></button></td>
+            <td class="col-2"><button class="btn btn-danger btn-block" type="button" onclick="window.location.pathname = window.location.pathname + '/delete/${result[i].id}'"><i class="fas fa-file-excel" ></i>Delete</button></td>
+        </tr>
+        <br>
+    </table>
+</form>
+</div>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="icon" href="./icon.png">
+    <style>
+        .paginat {
+            text-align:center;
+            margin: 5% auto;
+            list-style-type: none;
+        }
+        .paginat > .pag-item {
+            display: inline;
+            border: 2px solid green;
+            padding: 1%;
+        }
+        .paginat > .pag-item:not(.active):hover{
+            opacity: 0.5;
+            cursor: pointer;
+        }
+        .paginat > .active {
+            pointer-events: nonde;
+            background-color: blue;
+            color: white;
+        }
+        .paginat > .pag-item > a {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="text-center text-success">Hi</h1>
+    <div id="pages">
+        <div class="page">
+            <ul class="paginat">
+                <li class="pag-item active" disabled="true"><a href="#">1</a></li>
+                <li class="pag-item"><a href="#">2</a></li>
+                <li class="pag-item"><a href="#">3</a></li>
+                <li class="pag-item"><a href="#">4</a></li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        setInterval(pagination,100);
+        var arr = [
+            'q',
+            'w',
+            'e',
+            'r',
+            't',
+            'y',
+            'u',
+            'i',
+            'o',
+            'p'
+        ]
+        var sort_num = 3;
+        var page_num = Math.floor(arr.length/sort_num);
+        var ostatok = arr.length%sort_num;
+        var _now = 0;
+        var pages = document.getElementById('pages');
+
+        for(var i=0; i<=page_num;i++){
+            if(i<page_num){
+                pages.innerHTML += `<div class="page" id="#page${i}">`;
+                for(let k=0; k<sort_num; k++){
+                    pages.innerHTML += `
+                            <h1>${arr[_now]}</h1>
+                    `;
+                    _now++;
+                }
+                pages.innerHTML += `</div>`;
+            } else if(i==page_num){
+                pages.innerHTML += `<div class="page" id="#page${i}">`;
+                for(let k=0; k<ostatok; k++){
+                    pages.innerHTML += `
+                            <h1>${arr[_now]}</h1>    
+                    `;
+                    _now++;
+                }
+                pages.innerHTML += `</div>`;
+            }
+        }
+        function pagination(){
+            var hash = window.location.hash;
+            var hash_adr = hash.substring(1,hash.length);
+            var block = document.getElementById(hash_adr);
+            var blocks = document.getElementsByClassName('page');
+            blocks.style = "display: none";
+            block.style = "display: block";
+        }
+
+    </script>
+</body>
+</html>
