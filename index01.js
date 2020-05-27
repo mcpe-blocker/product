@@ -179,8 +179,7 @@ app.get('/user/:username/:page_id',(req,res)=>{
             var page_count = Math.ceil(result.length / sort_num);
             res.write(`
             </table>
-            <ul class="pagination text-center" style="margin: 1% auto">
-            `);
+            <ul class="pagination text-center" style="margin: 1% auto">`);
             for(let k=1; k<=page_count; k++){
                 res.write(`
                     <li class="page-item"><a class="page-link" href="./${k}">${k}</a></li>
